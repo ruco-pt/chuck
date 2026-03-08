@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "chucky"
+version = "2.0.0"
+description = "Context digests for AI agents and humans. Snap, patch, ship."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "Chuck Context", email = "hello@chuckcontext.dev" },
+]
+keywords = [
+    "context", "llm", "ai", "agents", "tokens",
+    "snapshot", "diff", "claude", "aider", "developer-tools",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Version Control",
+    "Typing :: Typed",
+]
+
+[project.optional-dependencies]
+tiktoken = ["tiktoken>=0.5.0"]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+]
+
+[project.scripts]
+chuck = "chuck.cli:main"
+chuck-aider = "chuck_aider:main"
+chuck-aider-init = "chuck_aider_init:main"
+
+[project.urls]
+Homepage = "https://github.com/ruco-pt/chuck"
+Documentation = "https://github.com/ruco-pt/chuck#readme"
+Repository = "https://github.com/ruco-pt/chuck"
+Issues = "https://github.com/ruco-pt/chuck/issues"
+Changelog = "https://github.com/ruco-pt/chuck/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/chuck"]
+force-include = { "chuck_aider.py" = "chuck_aider.py", "chuck_aider_init.py" = "chuck_aider_init.py" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
